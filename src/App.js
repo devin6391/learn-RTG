@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import AppBar from "./packages/basic/app-bar";
+import BasicAppBar from "./packages/basic/app-bar";
 import "./App.css";
 
 class App extends Component {
@@ -8,7 +8,7 @@ class App extends Component {
     return (
       <Router>
         <div>
-          <Route exact path="/basic" component={AppBar} />
+          <Route exact path="/basic" component={BasicAppBar} />
         </div>
       </Router>
     );
