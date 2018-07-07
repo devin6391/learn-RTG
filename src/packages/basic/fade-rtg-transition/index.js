@@ -1,6 +1,7 @@
 import React from "react";
 import { withStyles } from "@material-ui/core/styles";
 import { fadeBlockStyles } from "../basic.style";
+import FadeComponent from "../fade-component";
 import { Transition } from "react-transition-group";
 
 const FadeRtgTransition = ({ classes, animatenow }) => (
@@ -8,23 +9,19 @@ const FadeRtgTransition = ({ classes, animatenow }) => (
     {state => {
       console.log(state);
       switch (state) {
-        case "entering":
-          return (
-            <div className={classes.root}>
-              <h1>This is React Transition Group fade</h1>
-            </div>
-          );
         case "entered":
           return (
-            <div className={classes.root + " " + classes.animateCss}>
-              <h1>This is React Transition Group fade</h1>
-            </div>
+            <FadeComponent
+              className={classes.root + " " + classes.animateCss}
+              text={"This is React Transition Group fade"}
+            />
           );
         default:
           return (
-            <div className={classes.root}>
-              <h1>This is React Transition Group fade</h1>
-            </div>
+            <FadeComponent
+              className={classes.root}
+              text={"This is React Transition Group fade"}
+            />
           );
       }
     }}

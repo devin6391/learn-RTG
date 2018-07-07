@@ -1,4 +1,5 @@
 import React from "react";
+import FadeComponent from "../fade-component";
 import { CSSTransition } from "react-transition-group";
 
 export default ({ animatenow }) => (
@@ -11,8 +12,9 @@ export default ({ animatenow }) => (
       exitDone: "fadePureCssClass"
     }}
   >
-    <div className="fadePureCssClass">
-      <h1>This is React Transition Group fade</h1>
-    </div>
+    <FadeComponent
+      className={"fadePureCssClass"}
+      text={"This is React Transition Group fade"}
+    />
   </CSSTransition>
 );
