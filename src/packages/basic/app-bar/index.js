@@ -9,7 +9,6 @@ import FadeComponent from "../fade-component";
 import FadeCss from "../fade-css";
 import FadeRtgTransition from "../fade-rtg-transition";
 import FadeRtgCssTransition from "../fade-rtg-csstransition";
-import FadeRtgPureCssTransition from "../fade-rtg-css-full";
 
 function TabContainer(props) {
   return (
@@ -23,8 +22,7 @@ class BasicTabs extends React.Component {
   state = {
     value: "plain",
     showTransition: false,
-    showCssTransition: false,
-    showPureCssTransition: false
+    showCssTransition: false
   };
 
   handleChange = (event, value) => {
@@ -35,8 +33,7 @@ class BasicTabs extends React.Component {
         () =>
           this.setState({
             showTransition: true,
-            showCssTransition: false,
-            showPureCssTransition: false
+            showCssTransition: false
           }),
         10
       );
@@ -45,18 +42,7 @@ class BasicTabs extends React.Component {
         () =>
           this.setState({
             showCssTransition: true,
-            showTransition: false,
-            showPureCssTransition: false
-          }),
-        10
-      );
-    } else if (value === "pureCssTransition") {
-      setTimeout(
-        () =>
-          this.setState({
-            showCssTransition: false,
-            showTransition: false,
-            showPureCssTransition: true
+            showTransition: false
           }),
         10
       );
@@ -65,12 +51,7 @@ class BasicTabs extends React.Component {
 
   render() {
     const { classes } = this.props;
-    const {
-      value,
-      showTransition,
-      showCssTransition,
-      showPureCssTransition
-    } = this.state;
+    const { value, showTransition, showCssTransition } = this.state;
     return (
       <div className={classes.root}>
         <AppBar position="static" color="default">
@@ -85,7 +66,6 @@ class BasicTabs extends React.Component {
             <Tab label="CSS" value="css" />
             <Tab label="RTG Transition" value="transition" />
             <Tab label="RTG CSS transition" value="cssTransition" />
-            <Tab label="RTG CSS Pure transition" value="pureCssTransition" />
           </Tabs>
         </AppBar>
         {value === "plain" && (
@@ -106,11 +86,6 @@ class BasicTabs extends React.Component {
         {value === "cssTransition" && (
           <TabContainer>
             <FadeRtgCssTransition animatenow={showCssTransition} />
-          </TabContainer>
-        )}
-        {value === "pureCssTransition" && (
-          <TabContainer>
-            <FadeRtgPureCssTransition animatenow={showPureCssTransition} />
           </TabContainer>
         )}
       </div>

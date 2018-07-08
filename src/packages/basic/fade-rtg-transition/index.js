@@ -7,7 +7,6 @@ import { Transition } from "react-transition-group";
 const FadeRtgTransition = ({ classes, animatenow }) => (
   <Transition in={animatenow} timeout={1} appear={true}>
     {state => {
-      console.log(state);
       switch (state) {
         case "entered":
           return (
