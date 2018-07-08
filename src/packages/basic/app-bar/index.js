@@ -19,7 +19,7 @@ function TabContainer(props) {
   );
 }
 
-class FullWidthTabs extends React.Component {
+class BasicTabs extends React.Component {
   state = {
     value: "plain",
     showTransition: false,
@@ -118,4 +118,4 @@ class FullWidthTabs extends React.Component {
   }
 }
 
-export default withStyles(appBarStyles, { withTheme: true })(FullWidthTabs);
+export default withStyles(appBarStyles, { withTheme: true })(BasicTabs);
