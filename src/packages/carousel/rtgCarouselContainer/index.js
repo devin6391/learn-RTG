@@ -11,14 +11,17 @@ const CarouselContainer = ({ classes, dataArr }) => (
       <KeyboardLeftIcon />
     </div>
     <div className={classes.carouselContainer}>
-      {dataArr.map(data => (
-        <CarouselComponent
-          imageUrl={data.imageUrl}
-          title={data.title}
-          text={data.text}
-          classes={classes}
-        />
-      ))}
+      <div className={classes.itemList}>
+        {dataArr.map(data => (
+          <CarouselComponent
+            key={data.title}
+            imageUrl={data.imageUrl}
+            title={data.title}
+            text={data.text}
+            classes={classes}
+          />
+        ))}
+      </div>
     </div>
     <div className={classes.rightMove}>
       <KeyboardRightIcon />
