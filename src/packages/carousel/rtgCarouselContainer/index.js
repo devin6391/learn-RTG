@@ -50,11 +50,6 @@ class CarouselContainer extends Component {
             {dataArr.map((data, index) => (
               <Transition in={index === currIndex} key={data.title} timeout={1}>
                 {state => {
-                  console.log(
-                    `${
-                      data.title
-                    } is in state - ${state}. Its index is ${index} whereas currIndex is ${currIndex}`
-                  );
                   let wrapperClass = classes.rtgFarRight;
                   switch (state) {
                     case "entering":
@@ -67,8 +62,7 @@ class CarouselContainer extends Component {
                         classes.rtgCenter + " " + classes.rtgWithTransition;
                       break;
                     case "exiting":
-                      wrapperClass =
-                        classes.rtgCenter + " " + classes.rtgWithTransition;
+                      wrapperClass = classes.rtgCenter;
                       break;
                     case "exited":
                       wrapperClass =
