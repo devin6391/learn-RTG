@@ -31,7 +31,7 @@ const carouselDataArr = [
   },
   {
     imageUrl:
-      "https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&h=350",
+      "https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350",
     title: "The Track",
     text: "Railway track through peaceful trees"
   }

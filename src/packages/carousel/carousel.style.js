@@ -5,8 +5,8 @@ export const appBarStyles = theme => ({
   }
 });
 
-const carouselElemWidth = 345;
-const carouselElemMargin = 33;
+export const carouselElemWidth = 345;
+export const carouselElemMargin = 33;
 const carouselPadding = 10;
 const carouselArrowStyle = theme => ({
   flex: 1,
@@ -49,6 +49,7 @@ export const carouselComponentStyles = theme => ({
   itemList: {
     width: "auto",
     display: "flex",
+    transition: "0.3s",
     "& > div": {
       width: carouselElemWidth,
       paddingTop: carouselPadding,
