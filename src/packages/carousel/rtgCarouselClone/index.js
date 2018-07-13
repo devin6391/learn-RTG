@@ -1,19 +1,25 @@
 import React, { Component } from "react";
 import { withStyles } from "@material-ui/core/styles";
-import { Transition } from "react-transition-group";
-import CarouselComponent from "../carouselComponent";
 import { carouselComponentStyles } from "../carousel.style";
 import KeyboardLeftIcon from "@material-ui/icons/KeyboardArrowLeft";
 import KeyboardRightIcon from "@material-ui/icons/KeyboardArrowRight";
+import TransitioningComponent from "./transitioningComponent";
 
 class CarouselContainer extends Component {
   state = {
     currIndex: 0,
+    prevIndex: 0,
+    appearDirty: false,
     direction: 0 // 0 for left and 1 for right
   };
 
+  componentDidMount() {
+    this.setState({ prevIndex: this.props.dataArr.length - 1 });
+  }
+
   slideLeftClick = () => {
     let { currIndex } = this.state;
+    let prevIndex = currIndex;
     if (currIndex > 0) {
       currIndex--;
     } else if (currIndex === 0) {
@@ -21,11 +27,12 @@ class CarouselContainer extends Component {
     } else {
       throw Error(`Current Index of element can't go below 0`);
     }
-    this.setState({ currIndex, direction: 1 });
+    this.setState({ currIndex, prevIndex, direction: 1, appearDirty: true });
   };
 
   slideRightClick = () => {
     let { currIndex } = this.state;
+    let prevIndex = currIndex;
     let maxIndex = this.props.dataArr.length - 1;
     if (currIndex < maxIndex) {
       currIndex++;
@@ -34,61 +41,47 @@ class CarouselContainer extends Component {
     } else {
       throw Error(`Current Index of element can't go beyond ${maxIndex}`);
     }
-    this.setState({ currIndex, direction: 0 });
+    this.setState({ currIndex, prevIndex, direction: 0, appearDirty: true });
+  };
+
+  getElems = () => {
+    const { classes, dataArr } = this.props;
+    const { direction, currIndex, prevIndex, appearDirty } = this.state;
+    const currData = dataArr[currIndex];
+    const prevData = dataArr[prevIndex];
+    return [
+      React.cloneElement(
+        <TransitioningComponent
+          enter={true}
+          data={currData}
+          classes={classes}
+          direction={direction}
+          key={currData.title}
+          appear={appearDirty}
+        />
+      ),
+      React.cloneElement(
+        <TransitioningComponent
+          enter={false}
+          data={prevData}
+          classes={classes}
+          direction={direction}
+          key={prevData.title}
+          appear={false}
+        />
+      )
+    ];
   };
 
   render() {
-    const { classes, dataArr } = this.props;
-    const { direction, currIndex } = this.state;
+    const { classes } = this.props;
     return (
       <div className={classes.root}>
         <div className={classes.leftMove} onClick={this.slideLeftClick}>
           <KeyboardLeftIcon />
         </div>
         <div className={classes.carouselContainer}>
-          <div className={classes.rtgList}>
-            {dataArr.map((data, index) => (
-              <Transition in={index === currIndex} key={data.title} timeout={1}>
-                {state => {
-                  let wrapperClass = classes.rtgFarRight;
-                  switch (state) {
-                    case "entering":
-                      wrapperClass = !!direction
-                        ? classes.rtgFarLeft
-                        : classes.rtgFarRight;
-                      break;
-                    case "entered":
-                      wrapperClass =
-                        classes.rtgCenter + " " + classes.rtgWithTransition;
-                      break;
-                    case "exiting":
-                      wrapperClass = classes.rtgCenter;
-                      break;
-                    case "exited":
-                      wrapperClass =
-                        (!!direction
-                          ? classes.rtgFarRight
-                          : classes.rtgFarLeft) +
-                        " " +
-                        classes.rtgWithTransition;
-                      break;
-                    default:
-                      throw new Error("Transition has no state");
-                  }
-                  return (
-                    <div className={`${wrapperClass} ${classes.rtgWrapper}`}>
-                      <CarouselComponent
-                        imageUrl={data.imageUrl}
-                        title={data.title}
-                        text={data.text}
-                        classes={classes}
-                      />
-                    </div>
-                  );
-                }}
-              </Transition>
-            ))}
-          </div>
+          <div className={classes.rtgList}>{this.getElems()}</div>
         </div>
         <div className={classes.rightMove} onClick={this.slideRightClick}>
           <KeyboardRightIcon />
