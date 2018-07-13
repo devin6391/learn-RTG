@@ -6,6 +6,7 @@ import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
 import CarouselContainer from "../carouselContainer";
 import RtgCarouselContainer from "../rtgCarouselContainer";
+import RtgCarouselCLone from "../rtgCarouselClone";
 import { appBarStyles } from "../carousel.style";
 
 function TabContainer(props) {
@@ -61,6 +62,7 @@ class CarouselTabs extends React.Component {
           >
             <Tab label="Plain" value="plain" />
             <Tab label="React Transition Group" value="rtg" />
+            <Tab label="React Transition Group with clone" value="rtgClone" />
           </Tabs>
         </AppBar>
         {value === "plain" && (
@@ -71,6 +73,11 @@ class CarouselTabs extends React.Component {
         {value === "rtg" && (
           <TabContainer>
             <RtgCarouselContainer dataArr={carouselDataArr} />
+          </TabContainer>
+        )}
+        {value === "rtgClone" && (
+          <TabContainer>
+            <RtgCarouselCLone dataArr={carouselDataArr} />
           </TabContainer>
         )}
       </div>
