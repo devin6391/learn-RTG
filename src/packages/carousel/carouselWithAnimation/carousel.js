@@ -54,9 +54,6 @@ class Carousel extends Component {
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
-    console.log("In derive state fn");
-    console.log(nextProps);
-    console.log(prevState);
     return {
       prevWatchProp: prevState.nextWatchProp,
       prevChildProps: prevState.nextChildProps,
@@ -101,13 +98,13 @@ class Carousel extends Component {
           {React.cloneElement(this.props.children, prevChildProps)}
         </TransitioningComponent>
       );
-    console.log(clonedElems.length);
     return clonedElems;
   };
 
   render() {
-    const { watchProp, childProps, classes, children, direction } = this.props;
-    return <div className={classes.rtgList}>{this.getCLonedElems()}</div>;
+    return (
+      <div className={this.props.classes.rtgList}>{this.getCLonedElems()}</div>
+    );
   }
 }
 
