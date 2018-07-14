@@ -54,7 +54,6 @@ class CarouselContainer extends Component {
         <div className={classes.carouselContainer}>
           <div className={classes.itemList}>
             <CarouselComponent
-              key={data.title}
               imageUrl={data.imageUrl}
               title={data.title}
               text={data.text}
