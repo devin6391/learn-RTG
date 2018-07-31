@@ -4,9 +4,8 @@ import AppBar from "@material-ui/core/AppBar";
 import Tabs from "@material-ui/core/Tabs";
 import Tab from "@material-ui/core/Tab";
 import Typography from "@material-ui/core/Typography";
-import CarouselContainer from "../carouselContainer";
-import RtgCarouselContainer from "../rtgCarouselContainer";
-import RtgCarouselCLone from "../rtgCarouselClone";
+import CarouselNoAnimation from "../carouselNoAnimation";
+import CarouselWithAnimation from "../carouselWithAnimation";
 import { appBarStyles } from "../carousel.style";
 
 function TabContainer(props) {
@@ -19,18 +18,21 @@ function TabContainer(props) {
 
 const carouselDataArr = [
   {
+    id: 1,
     imageUrl:
       "https://images.pexels.com/photos/257360/pexels-photo-257360.jpeg?auto=compress&cs=tinysrgb&h=350",
     title: "The Seat",
     text: "Relax in the beauty"
   },
   {
+    id: 2,
     imageUrl:
       "https://images.pexels.com/photos/236047/pexels-photo-236047.jpeg?auto=compress&cs=tinysrgb&h=350",
     title: "The Farm",
     text: "Feel the freedom"
   },
   {
+    id: 3,
     imageUrl:
       "https://images.pexels.com/photos/34950/pexels-photo.jpg?auto=compress&cs=tinysrgb&h=350",
     title: "The Track",
@@ -40,7 +42,7 @@ const carouselDataArr = [
 
 class CarouselTabs extends React.Component {
   state = {
-    value: "plain"
+    value: "noAnimation"
   };
 
   handleChange = (event, value) => {
@@ -60,24 +62,18 @@ class CarouselTabs extends React.Component {
             textColor="primary"
             fullWidth
           >
-            <Tab label="Plain" value="plain" />
-            <Tab label="React Transition Group" value="rtg" />
-            <Tab label="React Transition Group with clone" value="rtgClone" />
+            <Tab label="Carousel Without animation" value="noAnimation" />
+            <Tab label="Carousel With Animation" value="withAnimation" />
           </Tabs>
         </AppBar>
-        {value === "plain" && (
+        {value === "noAnimation" && (
           <TabContainer>
-            <CarouselContainer dataArr={carouselDataArr} />
+            <CarouselNoAnimation dataArr={carouselDataArr} />
           </TabContainer>
         )}
-        {value === "rtg" && (
+        {value === "withAnimation" && (
           <TabContainer>
-            <RtgCarouselContainer dataArr={carouselDataArr} />
-          </TabContainer>
-        )}
-        {value === "rtgClone" && (
-          <TabContainer>
-            <RtgCarouselCLone dataArr={carouselDataArr} />
+            <CarouselWithAnimation dataArr={carouselDataArr} />
           </TabContainer>
         )}
       </div>

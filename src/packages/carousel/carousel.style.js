@@ -51,7 +51,7 @@ export const carouselComponentStyles = theme => ({
   itemList: {
     width: "auto",
     display: "flex",
-    transition: carouselTransitionTime,
+    // transition: carouselTransitionTime,
     "& > div": {
       width: carouselElemWidth,
       paddingTop: carouselPadding,
